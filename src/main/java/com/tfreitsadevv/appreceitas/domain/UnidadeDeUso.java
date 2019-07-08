@@ -1,8 +1,8 @@
 package com.tfreitsadevv.appreceitas.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class UnidadeDeCompra implements Serializable {
+public class UnidadeDeUso implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -19,14 +19,14 @@ public class UnidadeDeCompra implements Serializable {
 	private Integer id;
 	private String nome;
 	
-	@OneToMany(mappedBy = "unidadeDeCompra")
-	private List<Ingrediente> ingredientes = new ArrayList<>();
+	@OneToMany(mappedBy = "id.unidadeDeUso")
+	private Set<Conversao> ingredientes = new HashSet<>();
 	
-	public UnidadeDeCompra() {
+	public UnidadeDeUso() {
 		
 	}
 
-	public UnidadeDeCompra(Integer id, String nome) {
+	public UnidadeDeUso(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -64,7 +64,7 @@ public class UnidadeDeCompra implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UnidadeDeCompra other = (UnidadeDeCompra) obj;
+		UnidadeDeUso other = (UnidadeDeUso) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -73,11 +73,11 @@ public class UnidadeDeCompra implements Serializable {
 		return true;
 	}
 
-	public List<Ingrediente> getIngredientes() {
+	public Set<Conversao> getIngredientes() {
 		return ingredientes;
 	}
 
-	public void setIngredientes(List<Ingrediente> ingredientes) {
+	public void setIngredientes(Set<Conversao> ingredientes) {
 		this.ingredientes = ingredientes;
 	}
 	
