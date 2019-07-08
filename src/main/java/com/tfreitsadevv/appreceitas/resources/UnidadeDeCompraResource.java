@@ -23,6 +23,6 @@ public class UnidadeDeCompraResource {
 		UnidadeDeCompra obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 		
-	}
+	}	
 
 }
