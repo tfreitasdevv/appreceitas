@@ -1,31 +1,28 @@
 package com.tfreitsadevv.appreceitas.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tfreitsadevv.appreceitas.domain.UnidadeDeCompra;
+import com.tfreitsadevv.appreceitas.services.UnidadeDeCompraService;
 
 @RestController
 @RequestMapping(value="/unidadesdecompra")
 public class UnidadeDeCompraResource {
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public List<UnidadeDeCompra> listar() {
+	@Autowired
+	private UnidadeDeCompraService service;
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> find(@PathVariable Integer id) {
 		
-		UnidadeDeCompra uc1 = new UnidadeDeCompra(1, "Kg");
-		UnidadeDeCompra uc2 = new UnidadeDeCompra(2, "g");
-		UnidadeDeCompra uc3 = new UnidadeDeCompra(3, "L");
+		UnidadeDeCompra obj = service.find(id);
+		return ResponseEntity.ok().body(obj);
 		
-		List<UnidadeDeCompra> lista = new ArrayList<>();
-		lista.add(uc1);
-		lista.add(uc2);
-		lista.add(uc3);
-		
-		return lista;
 	}
 
 }
