@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class UnidadeDeCompra implements Serializable {
+public class TipoReceita implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -19,16 +19,14 @@ public class UnidadeDeCompra implements Serializable {
 	private Integer id;
 	private String nome;
 	
-	@OneToMany(mappedBy = "unidadeDeCompra")
-	private List<Ingrediente> ingredientes = new ArrayList<>();
+	@OneToMany(mappedBy = "tipoReceita")
+	private List<Receita> receitas = new ArrayList<>(); 
 	
-	public UnidadeDeCompra() {
+	public TipoReceita() {
 		
 	}
-	
-	
 
-	public UnidadeDeCompra(Integer id, String nome) {
+	public TipoReceita(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -50,6 +48,14 @@ public class UnidadeDeCompra implements Serializable {
 		this.nome = nome;
 	}
 
+	public List<Receita> getReceitas() {
+		return receitas;
+	}
+
+	public void setReceitas(List<Receita> receitas) {
+		this.receitas = receitas;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -66,7 +72,7 @@ public class UnidadeDeCompra implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UnidadeDeCompra other = (UnidadeDeCompra) obj;
+		TipoReceita other = (TipoReceita) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -74,15 +80,7 @@ public class UnidadeDeCompra implements Serializable {
 			return false;
 		return true;
 	}
-
-	public List<Ingrediente> getIngredientes() {
-		return ingredientes;
-	}
-
-	public void setIngredientes(List<Ingrediente> ingredientes) {
-		this.ingredientes = ingredientes;
-	}
 	
 	
-
+	
 }

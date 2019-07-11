@@ -1,17 +1,14 @@
 package com.tfreitsadevv.appreceitas.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
-public class UnidadeDeCompra implements Serializable {
+public class UnidadeDeRendimento implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -19,16 +16,11 @@ public class UnidadeDeCompra implements Serializable {
 	private Integer id;
 	private String nome;
 	
-	@OneToMany(mappedBy = "unidadeDeCompra")
-	private List<Ingrediente> ingredientes = new ArrayList<>();
-	
-	public UnidadeDeCompra() {
+	public UnidadeDeRendimento() {
 		
 	}
-	
-	
 
-	public UnidadeDeCompra(Integer id, String nome) {
+	public UnidadeDeRendimento(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -66,7 +58,7 @@ public class UnidadeDeCompra implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UnidadeDeCompra other = (UnidadeDeCompra) obj;
+		UnidadeDeRendimento other = (UnidadeDeRendimento) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -75,14 +67,5 @@ public class UnidadeDeCompra implements Serializable {
 		return true;
 	}
 
-	public List<Ingrediente> getIngredientes() {
-		return ingredientes;
-	}
-
-	public void setIngredientes(List<Ingrediente> ingredientes) {
-		this.ingredientes = ingredientes;
-	}
 	
-	
-
 }

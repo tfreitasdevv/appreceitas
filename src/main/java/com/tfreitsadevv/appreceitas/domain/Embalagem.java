@@ -1,37 +1,37 @@
 package com.tfreitsadevv.appreceitas.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
-public class UnidadeDeCompra implements Serializable {
+public class Embalagem implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	private String descricao;
+	private String fabricante;
+	private Integer quantidade;
+	private Double custo;
 	
-	@OneToMany(mappedBy = "unidadeDeCompra")
-	private List<Ingrediente> ingredientes = new ArrayList<>();
-	
-	public UnidadeDeCompra() {
+	public Embalagem() {
 		
 	}
-	
-	
 
-	public UnidadeDeCompra(Integer id, String nome) {
+	public Embalagem(Integer id, String nome, String descricao, String fabricante, Integer quantidade, Double custo) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.descricao = descricao;
+		this.fabricante = fabricante;
+		this.quantidade = quantidade;
+		this.custo = custo;
 	}
 
 	public Integer getId() {
@@ -50,6 +50,38 @@ public class UnidadeDeCompra implements Serializable {
 		this.nome = nome;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public String getFabricante() {
+		return fabricante;
+	}
+
+	public void setFabricante(String fabricante) {
+		this.fabricante = fabricante;
+	}
+
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public Double getCusto() {
+		return custo;
+	}
+
+	public void setCusto(Double custo) {
+		this.custo = custo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -66,21 +98,13 @@ public class UnidadeDeCompra implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UnidadeDeCompra other = (UnidadeDeCompra) obj;
+		Embalagem other = (Embalagem) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	public List<Ingrediente> getIngredientes() {
-		return ingredientes;
-	}
-
-	public void setIngredientes(List<Ingrediente> ingredientes) {
-		this.ingredientes = ingredientes;
 	}
 	
 	

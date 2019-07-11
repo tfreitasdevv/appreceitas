@@ -28,21 +28,26 @@ public class Ingrediente implements Serializable {
 	private String descricao;
 	private Double quantidade;
 	private Double custo;
-	private UnidadeReferencia unidadeReferencia;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="unidadeDeCompra_id")
 	private UnidadeDeCompra unidadeDeCompra;
 	
+	private Integer unidadeReferencia;
+	
 	@OneToMany(mappedBy = "id.ingrediente")
 	private Set<Conversao> ingredientes = new HashSet<>();
+	
+	@OneToMany(mappedBy = "id.ingrediente")
+	private Set<IngredienteReceita> ingredientesReceita = new HashSet<>();
 	
 	public Ingrediente() {
 		
 	}
 
 	public Ingrediente(Integer id, String nome, String fabricante, String descricao, Double quantidade, Double custo,
-			UnidadeReferencia unidadeReferencia) {
+			UnidadeDeCompra unidadeDeCompra, UnidadeReferencia unidadeReferencia) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -50,9 +55,19 @@ public class Ingrediente implements Serializable {
 		this.descricao = descricao;
 		this.quantidade = quantidade;
 		this.custo = custo;
-		this.unidadeReferencia = unidadeReferencia;
+		this.unidadeDeCompra = unidadeDeCompra;
+		this.unidadeReferencia = unidadeReferencia.getCod();
 	}
 	
+	public List<Receita> getReceitas() {
+		List<Receita> listaReceitas = new ArrayList<>();
+		for (IngredienteReceita x : ingredientesReceita) {
+			listaReceitas.add(x.getReceita());
+		}
+		return listaReceitas;
+	}
+
+
 	public List<UnidadeDeUso> getUnidadesDeUso() {
 		List<UnidadeDeUso> lista = new ArrayList<>();
 		for (Conversao x : ingredientes) {
@@ -110,11 +125,11 @@ public class Ingrediente implements Serializable {
 	}
 
 	public UnidadeReferencia getUnidadeReferencia() {
-		return unidadeReferencia;
+		return UnidadeReferencia.toEnum(unidadeReferencia);
 	}
 
 	public void setUnidadeReferencia(UnidadeReferencia unidadeReferencia) {
-		this.unidadeReferencia = unidadeReferencia;
+		this.unidadeReferencia = unidadeReferencia.getCod();
 	}
 
 	public UnidadeDeCompra getUnidadeDeCompra() {
@@ -157,6 +172,15 @@ public class Ingrediente implements Serializable {
 	public void setIngredientes(Set<Conversao> ingredientes) {
 		this.ingredientes = ingredientes;
 	}
+
+	public Set<IngredienteReceita> getIngredientesReceita() {
+		return ingredientesReceita;
+	}
+
+	public void setIngredientesReceita(Set<IngredienteReceita> ingredientesReceita) {
+		this.ingredientesReceita = ingredientesReceita;
+	}
+	
 	
 	
 
