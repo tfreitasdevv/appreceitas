@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.tfreitsadevv.appreceitas.domain.enums.UnidadeTempo;
 
@@ -41,6 +42,9 @@ public class Receita implements Serializable {
 	
 	@OneToMany(mappedBy = "id.receita")
 	private Set<IngredienteReceita> ingredientesReceita = new HashSet<>();
+	
+	@OneToOne(mappedBy = "id.receita")
+	private EmbalagemReceita embalagemReceita;
 	
 	public Receita() {
 		
@@ -171,6 +175,14 @@ public class Receita implements Serializable {
 
 	public void setIngredientesReceita(Set<IngredienteReceita> ingredientesReceita) {
 		this.ingredientesReceita = ingredientesReceita;
+	}
+
+	public EmbalagemReceita getEmbalagemReceita() {
+		return embalagemReceita;
+	}
+
+	public void setEmbalagemReceita(EmbalagemReceita embalagemReceita) {
+		this.embalagemReceita = embalagemReceita;
 	}
 	
 	

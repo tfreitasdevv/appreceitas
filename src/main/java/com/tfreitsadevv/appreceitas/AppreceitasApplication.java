@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.tfreitsadevv.appreceitas.domain.Conversao;
 import com.tfreitsadevv.appreceitas.domain.Embalagem;
+import com.tfreitsadevv.appreceitas.domain.EmbalagemReceita;
 import com.tfreitsadevv.appreceitas.domain.Ingrediente;
 import com.tfreitsadevv.appreceitas.domain.IngredienteReceita;
 import com.tfreitsadevv.appreceitas.domain.Receita;
@@ -20,6 +21,7 @@ import com.tfreitsadevv.appreceitas.domain.UnidadeDeUso;
 import com.tfreitsadevv.appreceitas.domain.enums.UnidadeReferencia;
 import com.tfreitsadevv.appreceitas.domain.enums.UnidadeTempo;
 import com.tfreitsadevv.appreceitas.repositories.ConversaoRepository;
+import com.tfreitsadevv.appreceitas.repositories.EmbalagemReceitaRepository;
 import com.tfreitsadevv.appreceitas.repositories.EmbalagemRepository;
 import com.tfreitsadevv.appreceitas.repositories.IngredienteReceitaRepository;
 import com.tfreitsadevv.appreceitas.repositories.IngredienteRepository;
@@ -58,6 +60,9 @@ public class AppreceitasApplication implements CommandLineRunner {
 	
 	@Autowired
 	private IngredienteReceitaRepository ingredienteReceitaRepository;
+	
+	@Autowired
+	private EmbalagemReceitaRepository embalagemReceitaRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(AppreceitasApplication.class, args);
@@ -106,6 +111,8 @@ public class AppreceitasApplication implements CommandLineRunner {
 		i2.getReceitas().addAll(Arrays.asList(r1));
 		i3.getReceitas().addAll(Arrays.asList(r1));
 		
+		EmbalagemReceita er1 = new EmbalagemReceita(e1, r1, 20, 1.2);
+		
 		unidadeDeCompraRepository.saveAll(Arrays.asList(uc1, uc2, uc3));
 		unidadeDeUsoRepository.saveAll(Arrays.asList(uu1,uu2,uu3));
 		ingredienteRepository.saveAll(Arrays.asList(i1,i2,i3));		
@@ -115,6 +122,7 @@ public class AppreceitasApplication implements CommandLineRunner {
 		embalagemRepository.saveAll(Arrays.asList(e1));
 		receitaRepository.saveAll(Arrays.asList(r1));
 		ingredienteReceitaRepository.saveAll(Arrays.asList(ir1, ir2, ir3));
+		embalagemReceitaRepository.saveAll(Arrays.asList(er1));
 		
 		
 				

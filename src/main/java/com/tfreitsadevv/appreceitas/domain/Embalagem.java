@@ -20,6 +20,7 @@ public class Embalagem implements Serializable {
 	private Integer quantidade;
 	private Double custo;
 	
+	
 	public Embalagem() {
 		
 	}
