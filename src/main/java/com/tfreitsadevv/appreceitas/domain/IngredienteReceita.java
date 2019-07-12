@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class IngredienteReceita implements Serializable {
@@ -15,15 +17,20 @@ public class IngredienteReceita implements Serializable {
 	private Double quantidade;
 	private Double custo;
 	
+	@ManyToOne
+	@JoinColumn(name="unidadeDeUso_id")
+	private UnidadeDeUso unidadeDeUso;
+	
 	public IngredienteReceita( ) {		
 	}
 
-	public IngredienteReceita(Ingrediente ingrediente, Receita receita, Double quantidade, Double custo) {
+	public IngredienteReceita(Ingrediente ingrediente, Receita receita, Double quantidade, Double custo, UnidadeDeUso unidadeDeUso) {
 		super();
 		id.setIngrediente(ingrediente);
 		id.setReceita(receita);
 		this.quantidade = quantidade;
 		this.custo = custo;
+		this.unidadeDeUso = unidadeDeUso;
 	}
 	
 	public Ingrediente getIngrediente() {
@@ -81,6 +88,14 @@ public class IngredienteReceita implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public UnidadeDeUso getUnidadeDeUso() {
+		return unidadeDeUso;
+	}
+
+	public void setUnidadeDeUso(UnidadeDeUso unidadeDeUso) {
+		this.unidadeDeUso = unidadeDeUso;
 	}
 	
 	
