@@ -17,35 +17,37 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.tfreitsadevv.appreceitas.domain.UnidadeDeCompra;
-import com.tfreitsadevv.appreceitas.dto.UnidadeDeCompraDTO;
-import com.tfreitsadevv.appreceitas.services.UnidadeDeCompraService;
+import com.tfreitsadevv.appreceitas.domain.TipoReceita;
+import com.tfreitsadevv.appreceitas.dto.TipoReceitaDTO;
+import com.tfreitsadevv.appreceitas.services.TipoReceitaService;
 
 @RestController
-@RequestMapping(value="/unidadesdecompra")
-public class UnidadeDeCompraResource {
+@RequestMapping(value="/tiposReceita")
+public class TipoReceitaResource {
 	
 	@Autowired
-	private UnidadeDeCompraService service;
+	private TipoReceitaService service;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		
-		UnidadeDeCompra obj = service.find(id);
+		TipoReceita obj = service.find(id);
 		return ResponseEntity.ok().body(obj);		
 	}		
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody UnidadeDeCompraDTO objDTO) {
-		UnidadeDeCompra obj = service.fromDTO(objDTO);
+	public ResponseEntity<Void> insert(@Valid @RequestBody TipoReceitaDTO objDTO) {
+		TipoReceita obj = service.fromDTO(objDTO);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	
+	
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody UnidadeDeCompraDTO objDTO, @PathVariable Integer id){
-		UnidadeDeCompra obj = service.fromDTO(objDTO);
+	public ResponseEntity<Void> update(@Valid @RequestBody TipoReceitaDTO objDTO, @PathVariable Integer id){
+		TipoReceita obj = service.fromDTO(objDTO);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
@@ -58,20 +60,20 @@ public class UnidadeDeCompraResource {
 	}		
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<UnidadeDeCompraDTO>> findAll() {		
-		List<UnidadeDeCompra> list = service.findAll();
-		List<UnidadeDeCompraDTO> listDTO = list.stream().map(obj -> new UnidadeDeCompraDTO(obj)).collect(Collectors.toList());
+	public ResponseEntity<List<TipoReceitaDTO>> findAll() {		
+		List<TipoReceita> list = service.findAll();
+		List<TipoReceitaDTO> listDTO = list.stream().map(obj -> new TipoReceitaDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDTO);	
 	}
 	
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
-	public ResponseEntity<Page<UnidadeDeCompraDTO>> findPage(
+	public ResponseEntity<Page<TipoReceitaDTO>> findPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page, 
 			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage, 
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy, 
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {		
-		Page<UnidadeDeCompra> list = service.findPage(page, linesPerPage, orderBy, direction);
-		Page<UnidadeDeCompraDTO> listDTO = list.map(obj -> new UnidadeDeCompraDTO(obj));
+		Page<TipoReceita> list = service.findPage(page, linesPerPage, orderBy, direction);
+		Page<TipoReceitaDTO> listDTO = list.map(obj -> new TipoReceitaDTO(obj));
 		return ResponseEntity.ok().body(listDTO);	
 	}
 }

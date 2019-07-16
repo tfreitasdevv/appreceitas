@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tfreitsadevv.appreceitas.domain.enums.UnidadeTempo;
 
 @Entity
@@ -32,10 +33,12 @@ public class Receita implements Serializable {
 	private Double tempoDePreparo;
 	private Integer unidadeTempo;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="tipoReceita_id")
 	private TipoReceita tipoReceita;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="unidadeDeRendimento_id")
 	private UnidadeDeRendimento unidadeDeRendimento;

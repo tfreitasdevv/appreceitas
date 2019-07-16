@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tfreitsadevv.appreceitas.domain.enums.UnidadeReferencia;
 
 @Entity
@@ -29,7 +30,7 @@ public class Ingrediente implements Serializable {
 	private Double quantidade;
 	private Double custo;
 	
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="unidadeDeCompra_id")
 	private UnidadeDeCompra unidadeDeCompra;

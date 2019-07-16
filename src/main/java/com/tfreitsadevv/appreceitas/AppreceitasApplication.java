@@ -74,6 +74,10 @@ public class AppreceitasApplication implements CommandLineRunner {
 		UnidadeDeCompra uc1 = new UnidadeDeCompra(null, "Kg");
 		UnidadeDeCompra uc2 = new UnidadeDeCompra(null, "g");
 		UnidadeDeCompra uc3 = new UnidadeDeCompra(null, "L");
+		UnidadeDeCompra uc4 = new UnidadeDeCompra(null, "Teste4");
+		UnidadeDeCompra uc5 = new UnidadeDeCompra(null, "Teste5");
+		UnidadeDeCompra uc6 = new UnidadeDeCompra(null, "Teste6");
+		UnidadeDeCompra uc7 = new UnidadeDeCompra(null, "Teste7");
 		
 		UnidadeDeUso uu1 = new UnidadeDeUso(null, "Xícara");
 		UnidadeDeUso uu2 = new UnidadeDeUso(null, "Colher de chá");
@@ -113,7 +117,7 @@ public class AppreceitasApplication implements CommandLineRunner {
 		
 		EmbalagemReceita er1 = new EmbalagemReceita(e1, r1, 20, 1.2);
 		
-		unidadeDeCompraRepository.saveAll(Arrays.asList(uc1, uc2, uc3));
+		unidadeDeCompraRepository.saveAll(Arrays.asList(uc1, uc2, uc3, uc4, uc5, uc6, uc7));
 		unidadeDeUsoRepository.saveAll(Arrays.asList(uu1,uu2,uu3));
 		ingredienteRepository.saveAll(Arrays.asList(i1,i2,i3));		
 		conversaoRepository.saveAll(Arrays.asList(c1,c2,c3,c4,c5,c6,c7,c8));		
